@@ -1,0 +1,58 @@
+language: c
+
+os: linux
+dist: trusty
+sudo: required
+
+# cache dependencies build so they don't have to be built every time
+# Commenting out, since this (seemingly randomly) EITHER:
+# - Creates the cached directory, but leaves it blank, or
+# - Creates and fills in the cached directory.
+#cache:
+#      directories:
+#        - ${TRAVIS_BUILD_DIR}/spack
+
+matrix:
+      include:
+        - addons:
+            apt:
+              sources:
+                - ubuntu-toolchain-r-test
+              packages:
+                - g++-7
+                - gfortran-7
+                - wget
+          env:
+             - C_COMPILER="gcc-7"
+             - CXX_COMPILER="g++-7"
+             - FORTRAN_COMPILER="gfortran-7"
+
+        - addons:
+            apt:
+              sources:
+                - ubuntu-toolchain-r-test
+              packages:
+                - g++-8
+                - gfortran-8
+                - wget
+          env:
+             - C_COMPILER="gcc-8"
+             - CXX_COMPILER="g++-8"
+             - FORTRAN_COMPILER="gfortran-8"
+
+before_install:
+    - export CC="${C_COMPILER}"
+    - export CXX="${CXX_COMPILER}"
+    - export FC="${FORTRAN_COMPILER}"
+
+install:
+    # Install Spack
+    - git clone https://github.com/benbenolson/spack.git
+    - cd spack
+    - . share/spack/setup-env.sh
+    - cd ..
+
+script:
+    - export SICM_DIR="${TRAVIS_BUILD_DIR}"
+    - spack repo add spack-repo
+    - spack install --no-checksum spack.sicm-low

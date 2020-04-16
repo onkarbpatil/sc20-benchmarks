@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+deck=`echo $1 | sed 's,\.cxx,,g;s,\.cc,,g;s,\.cpp,,g;s,.*\/,,g'`
+
+echo "${CMAKE_CXX_COMPILER} ${VPIC_CPPFLAGS} ${CMAKE_CXX_FLAGS} -I. -I/opt/likwid/4.3.4/include -I/projects/opt/centos7/likwid/4.3.2/include -I${CMAKE_SOURCE_DIR}/src ${VPIC_CXX_FLAGS} -DINPUT_DECK=$1 ${CMAKE_SOURCE_DIR}/deck/main.cc ${CMAKE_SOURCE_DIR}/deck/wrapper.cc -o $deck.${CMAKE_SYSTEM_NAME} -Wl,-rpath,${CMAKE_BINARY_DIR} -L${CMAKE_BINARY_DIR} -lvpic ${VPIC_CXX_LIBRARIES} -lpthread -ldl" # -L/opt/likwid/4.3.4/lib -L/projects/opt/centos7/likwid/4.3.2/lib  -llikwid
+
+${CMAKE_CXX_COMPILER} ${VPIC_CPPFLAGS} ${CMAKE_CXX_FLAGS} -I. -I/opt/likwid/4.3.4/include -I/projects/opt/centos7/likwid/4.3.2/include -I${CMAKE_SOURCE_DIR}/src ${VPIC_CXX_FLAGS} -DINPUT_DECK=$1 ${CMAKE_SOURCE_DIR}/deck/main.cc ${CMAKE_SOURCE_DIR}/deck/wrapper.cc -o $deck.${CMAKE_SYSTEM_NAME} -Wl,-rpath,${CMAKE_BINARY_DIR} -L${CMAKE_BINARY_DIR} -lvpic ${VPIC_CXX_LIBRARIES} -lpthread -ldl #-L/opt/likwid/4.3.4/lib -L/projects/opt/centos7/likwid/4.3.2/lib -llikwid
