@@ -1,0 +1,38 @@
+This repository contains the source code and scripts that will help
+recreate our experiments for the paper Using Non Volatile Memories to build energy and cost efficient HPC clusters.
+
+The 3 applications that are included in this repository are VPIC 1.1, LULESH 2.0 and AMG 1.0.
+To recreate our results, you will need 1 Intel Cascade-Lake node with 48 cores, 192 GB DRAM and 1.5 TB NVM.
+You will also need 4 nodes with Intel's Skylake processor with 44 cores and 384 GB DRAM connected 
+over Mellanox EDR 100GB/s switches.
+We use GCC 7.3.0 to compile all applications and OpenMPI-3.1.3 for MPI communications. We use LIKWID 4.3.4 to
+collect the hardware performance counter numbers. We don't use any additional libraries.
+You need a PDU at the rack level that collects power information at the node level at regular time intervals.
+We used the PDUs provided by HP that were part of the racks which reported numbers to the admin account.
+
+The compilation, execution and result collection is all automated using bash scripts available in the 
+repositoru except for the node level power numbers for which you need admin support.
+We 2 scripts that performa all the experimentation.
+optane.sh
+skylake.sh
+These 2 scripts launch application specific scripts one after the other that execute the different input runs in a loop.
+vpic-optane.sh
+vpic-skylake.sh
+amg-optane.sh
+amg-skylake.sh
+lulesh-optane.sh
+lulesh-skylake.sh
+All the scripts are made available in this folder.
+You need module load support as the scripts automatically load the required GCC, OpenMPI and LIKWID modules.
+You can execute the scripts in the following way
+./optane.sh 
+Keep in mind that execution time for these experiments can run into weeks so keep that in mind when you reserve the nodes
+when you are working with a shared cluster.
+These scripts automatically create the results folder where you can find all the output files.
+Each run is marked with a timestamp in the beginnning and timestamp at the end. You can use it to calculate the node energy
+by combining the power data from the rack.
+You can find more information about the specific inputs in the paper.
+We have included the environment information in this folder in optane-env.txt ans skylake-env.txt. We collected this info 
+using the collect_environment.sh script available in Author Kit.
+We also have included the LMbench3.0 suite in this folder. To recreate the result in the paper we run a single instance of 
+just the memory evaluation with a array size of 4096MB. The README of LMbench3.0 has the instructions to execute the benchmark.

@@ -5,12 +5,12 @@ set -x
 module load likwid
 
 export OMP_NUM_THREADS=1
-RESULTS="${HOME}/ipdps-memorymode/results"
+RESULTS="${HOME}/sc20-benchmarks/amg-optane-results"
 mkdir -p ${RESULTS}
 
 # likwid-mpirun -nperdomain N:1 -np 4 hostname
 
-cd ~/ipdps2020-benchmarks/memsys19-benchmarks/AMG
+cd ~/sc20-benchmarks/AMG
 make -j clean
 make -j
 cd test

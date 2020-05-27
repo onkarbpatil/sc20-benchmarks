@@ -3,10 +3,10 @@
 module load likwid
 
 export OMP_NUM_THREADS=1
-RESULTS="${HOME}/ipdps-memorymode/results"
+RESULTS="${HOME}/sc20-benchmarks/lulesh-optane-results"
 mkdir -p ${RESULTS}
 
-cd ~/ipdps2020-benchmarks/memsys19-benchmarks/LULESH
+cd ~/sc20-benchmarks/LULESH
 make clean
 make -j
 

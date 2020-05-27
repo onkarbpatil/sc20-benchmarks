@@ -5,10 +5,10 @@ module load likwid null
 
 set -x
 export OMP_NUM_THREADS=1
-RESULTS="${HOME}/ipdps-memorymode/results"
+RESULTS="${HOME}/sc20-benchmarks/vpic-optane-results"
 mkdir -p ${RESULTS}
 
-cd ~/ipdps2020-benchmarks/memsys19-benchmarks/vpic/
+cd ~/sc20-benchmarks/vpic/
 cd build
 rm -rf *
 cmake ..
