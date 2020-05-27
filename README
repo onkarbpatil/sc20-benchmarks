@@ -24,6 +24,7 @@ lulesh-optane.sh
 lulesh-skylake.sh
 All the scripts are made available in this folder.
 You need module load support as the scripts automatically load the required GCC, OpenMPI and LIKWID modules.
+Also you need SLURM support for the skylake script which usese srun. To see which SLURM version we use check skylake-env.txt.
 You can execute the scripts in the following way
 ./optane.sh 
 Keep in mind that execution time for these experiments can run into weeks so keep that in mind when you reserve the nodes
@@ -36,3 +37,5 @@ We have included the environment information in this folder in optane-env.txt an
 using the collect_environment.sh script available in Author Kit.
 We also have included the LMbench3.0 suite in this folder. To recreate the result in the paper we run a single instance of 
 just the memory evaluation with a array size of 4096MB. The README of LMbench3.0 has the instructions to execute the benchmark.
+Here is the DOI to this repository
+https://zenodo.org/badge/latestdoi/256066739
